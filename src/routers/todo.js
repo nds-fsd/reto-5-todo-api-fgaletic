@@ -15,12 +15,26 @@ tener 3 routers diferentes: userRouter, todoRouter y categoryRouter.
 
 const todoRouter = express.Router();
 
-todoRouter.get('/todo', (req, res) => {
-  //devolver todos los "todos" que hay en el array con formato JSON.
-});
+ //devolver todos los "to-dos" que hay en el array con formato JSON.
+ todoRouter.get('/todo', (req, res) => {
+  res.status(200).json(todos);
+ });
 
 todoRouter.post('/todo', (req, res) => {
+  if (!req.body.title) {
+    return res.status(400).json({ error: 'Title is required' });
+  }
   
+  const newTodo = {
+    id: todos.length + 1,
+    title: req.body.title,
+    fecha: req.body.fecha,
+    done: req.body.done
+  };
+
+  todos.push(newTodo);
+
+  res.status(201).json(newTodo);
   //crear un nuevo objeto con estructura {id, text, fecha, done} con los datos que vienen en el BODY de la Request y meterlos dentro de el array.
   //el nuevo objeto debe tener como id un numero mas que el numero actual de elementos guardados en el array.
 
@@ -39,7 +53,16 @@ Si con Insomnia o Postman hicisemos una peticion GET a la ruta /todo/12, está s
 
 
 */
-todoRouter.get('/todo/:id',  (req, res) => {
+todoRouter.get('/todo/: id',  (req, res) => {
+
+  const todoFound = todos.find(t => t.id === req.params.id);
+
+ if(!todoFound) {
+  res.status(404).json({error: 'To-do not found'});
+ } else {
+  res.status(200).json(todoFound);
+ }
+});
 
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
