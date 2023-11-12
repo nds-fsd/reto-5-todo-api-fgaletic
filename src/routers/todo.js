@@ -1,8 +1,7 @@
 const express = require('express');
-
+const controller = require('../controllers/controller');
 //importamos el fichero con los datos que necesita nuestro Router
 const {todos} = require('../data/index');
-
 
 /*
 
@@ -15,17 +14,14 @@ tener 3 routers diferentes: userRouter, todoRouter y categoryRouter.
 
 const todoRouter = express.Router();
 
-todoRouter.get('/todo', (req, res) => {
-  //devolver todos los "todos" que hay en el array con formato JSON.
-});
+ //devolver todos los "to-dos" que hay en el array con formato JSON.
+  //el codigo de status 200 significa que la peticion se ha procesado correctamente.
+todoRouter.get('/', controller.getTodo);
 
-todoRouter.post('/todo', (req, res) => {
-  
   //crear un nuevo objeto con estructura {id, text, fecha, done} con los datos que vienen en el BODY de la Request y meterlos dentro de el array.
   //el nuevo objeto debe tener como id un numero mas que el numero actual de elementos guardados en el array.
 
-});
-
+todoRouter.post('/', controller.postTodo);
 
 /*
 En este endpoint, el path contiene una variable llamada id. La syntaxis que utiliza express para estos casos es el simbolo :
@@ -39,7 +35,9 @@ Si con Insomnia o Postman hicisemos una peticion GET a la ruta /todo/12, está s
 
 
 */
-todoRouter.get('/todo/:id',  (req, res) => {
+
+todoRouter.get('/:id', controller.getTodoById);
+
 
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
@@ -47,27 +45,31 @@ todoRouter.get('/todo/:id',  (req, res) => {
   //buscar dentro del array "todos" aquel elemento que coincide con el id recibido por parametro de la ruta en la request.
   //si existe, devolverlo como formato JSON y codigo de status 200.
 
-  //Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
-});
+  //Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404
 
 
 // MISSING '/todo/:id' PATCH
 
-todoRouter.patch('/todo/:id',  (req, res) => {
-  //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
+todoRouter.patch('/:id', controller.updateTodo);
+
+
+//recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
   
   //buscar dentro del array "todos" aquel elemento que coincide con el id recibido por parametro de la ruta en la request.
   //si existe, lo ACTUALIZAMOS con los datos del BODY de la Request y lo devolvemos como formato JSON y codigo de status 200.
   
   //Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
-  
-});
+
+
+
+
 
 // MISSING '/todo/:id' DELETE
 
 
-todoRouter.delete('/todo/:id',  (req, res) => {
+todoRouter.delete('/:id', controller.deleteTodo);
+
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
   //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
   
@@ -75,8 +77,7 @@ todoRouter.delete('/todo/:id',  (req, res) => {
   //si existe, lo BORRAMOS y devolvemos un codigo de status 204.
   
   //Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
-  
-});
+
 
 
 //exportamos el router para poder 'usarlo' en nuestra app.
