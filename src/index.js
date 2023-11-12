@@ -7,7 +7,7 @@ const todoRouter = require('./routers/todo');
 app.use(express.json());
 
 //Le decimos a nuestra app, que "utilize" el router de to-dos. Esto es equivalente a haber definido todos nuestros endpoints directamente sobre el objeto app como vimos en clase.
-app.use(todoRouter);
+app.use('/todo', todoRouter);
 
 //a partir de este punto y gracias a la linea escrita mas arriba, si llega alguna peticion que empieze por /todo, está se redirige hacia todoRouter.
 
