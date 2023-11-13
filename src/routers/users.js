@@ -1,31 +1,24 @@
 
 const express = require('express');
-const User = require('../data/userList');
+const {users} = require('../data/userList');
 
 const router = express.Router();
 
 // GET all users
-router.get('/', async (req, res) => {
-    try {
-        const users = await User.find({});
-        res.send(users);
-    } catch (error) {
-        res.status(500).send(error);
-    }
+router.get('/', (req, res) => {
+    res.json(users)
 });
 
 // GET user by id
-router.get('/:id', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).send();
-        }
-        res.send(user);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-});
+router.get('/:id', (req, res) => {
+    const userFound = users.find(u => u.id === Number(req.params.id));
+
+    if(!userFound) {
+        res.status(404).json({error: 'User not found'});
+    } else {
+        res.status(200).json(userFound);
+            }};
+)
 
 // CREATE user
 router.post('/', async (req, res) => {

@@ -1,4 +1,6 @@
 const express = require('express');
+const Category = require('../data/categoriesList');
+
 const router = express.Router();
 
 // GET all categories
