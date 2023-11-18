@@ -1,4 +1,4 @@
-exports.userList = [
+exports.users = [
   {
     id: 0,
     name: "Homelander",
