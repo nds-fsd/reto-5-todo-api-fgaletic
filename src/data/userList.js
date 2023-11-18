@@ -1,22 +1,20 @@
-const userList = [
+exports.userList = [
   {
     id: 0,
     name: "Homelander",
     email: "homelander@example.com",
-    password: "password123"
+    password: "Password123"
   },
   {
     id: 1,
     name: "The Butcher",
     email: "butcher@example.com",
-    password: "password456"
+    password: "Password456"
   },
   {
     id: 2,
     name: "Black Noir",
     email: "blacknoir@example.com",
-    password: "password789"
+    password: "Password789"
   }
 ];
-
-module.exports = userList;

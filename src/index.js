@@ -17,8 +17,8 @@ app.use('/index', router);
 
 
 
-app.listen(3001, () => {
-    console.log("Server is up and running in port 3001");
+app.listen(3000, () => {
+    console.log("Server is up and running in port 3000");
 });
 
 

@@ -9,7 +9,7 @@ const postTodo = (req, res) => {
         return res.status(400).json({ error: 'Title is required and must be a string' });
     }
 
-    let date_regex = ([0-9]{4})-([0-9]{1,2})-([0-9]{1,2});
+    let date_regex = /^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/;
 
     if (!req.body.fecha || typeof req.body.title !== 'string' || !date_regex.test(req.body.fecha)) {
         return res.status(400).json({ error: 'Please enter date in the YYYY-MM-DD format'});

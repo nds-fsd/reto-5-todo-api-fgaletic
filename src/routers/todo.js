@@ -70,15 +70,14 @@ todoRouter.patch('/:id', todoController.updateTodo);
 
 todoRouter.delete('/:id', todoController.deleteTodo);
 
-  //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
-  //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
+//recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
+    //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
   
-  //buscar dentro del array "todos" aquel elemento que coincide con el id recibido por parametro de la ruta en la request.
-  //si existe, lo BORRAMOS y devolvemos un codigo de status 204.
+    //buscar dentro del array "todos" aquel elemento que coincide con el id recibido por parametro de la ruta en la request.
+    //si existe, lo BORRAMOS y devolvemos un codigo de status 204.
   
-  //Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
-
-
+    //Si no hemos encontrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
 
 //exportamos el router para poder 'usarlo' en nuestra app.
+
 module.exports = todoRouter;
