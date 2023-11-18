@@ -12,7 +12,12 @@ const postUser = (req, res) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d{1}|\W{1}).{8,}$/;
     if (!passwordRegex.test(req.body.password)) {
         return res.status(400).json({ error: 'Password must have at least 8 characters, an uppercase letter, and at least one special character' });
-    }
+    };
+
+    const emailRegex = /^[^@]+@\w+(\.\w+)+\w$/;
+    if (!emailRegex.test(req.body.email)) {
+        return res.status(400).json({ error: 'A valid email is required' });
+    };
 
     const newUser = {
         id: users.length,
