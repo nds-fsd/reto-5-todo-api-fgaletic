@@ -4,7 +4,7 @@ const userRouter = require('./user');
 
 const router = express.Router();
 
+router.use('/user', userRouter);
 router.use('/todo', todoRouter);
-router.use('/users', userRouter);
 
 module.exports = router;
