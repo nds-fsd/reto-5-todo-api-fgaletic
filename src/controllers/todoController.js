@@ -20,7 +20,8 @@ const postTodo = (req, res) => {
         id: todos.length,
         title: req.body.title,
         fecha: req.body.fecha,
-        done: req.body.done
+        done: req.body.done,
+        category: req.body.category
     };
 
     todos.push(newTodo);

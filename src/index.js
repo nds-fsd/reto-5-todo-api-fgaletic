@@ -1,10 +1,11 @@
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const router = require('./routers/index');
 // const todoRouter = require('./routers/todo');
 // const userRouter = require('./routers/users'); this is redundant
 
-
+app.use(cors())
 //Le decimos a nuestra app, que vamos recibir peticiones donde el Body contiene texto en formato JSON.
 app.use(express.json());
 
