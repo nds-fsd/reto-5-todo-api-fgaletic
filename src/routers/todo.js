@@ -1,7 +1,7 @@
 const express = require('express');
-const controller = require('../controllers/controller');
+const todoController = require('../controllers/todoController');
 //importamos el fichero con los datos que necesita nuestro Router
-const {todos} = require('../data/index');
+// const {todos} = require('../data/todoList');
 
 /*
 
@@ -16,12 +16,12 @@ const todoRouter = express.Router();
 
  //devolver todos los "to-dos" que hay en el array con formato JSON.
   //el codigo de status 200 significa que la peticion se ha procesado correctamente.
-todoRouter.get('/', controller.getTodo);
+todoRouter.get('/', todoController.getTodo);
 
   //crear un nuevo objeto con estructura {id, text, fecha, done} con los datos que vienen en el BODY de la Request y meterlos dentro de el array.
   //el nuevo objeto debe tener como id un numero mas que el numero actual de elementos guardados en el array.
 
-todoRouter.post('/', controller.postTodo);
+todoRouter.post('/', todoController.postTodo);
 
 /*
 En este endpoint, el path contiene una variable llamada id. La syntaxis que utiliza express para estos casos es el simbolo :
@@ -36,7 +36,7 @@ Si con Insomnia o Postman hicisemos una peticion GET a la ruta /todo/12, está s
 
 */
 
-todoRouter.get('/:id', controller.getTodoById);
+todoRouter.get('/:id', todoController.getTodoById);
 
 
   //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
@@ -50,7 +50,7 @@ todoRouter.get('/:id', controller.getTodoById);
 
 // MISSING '/todo/:id' PATCH
 
-todoRouter.patch('/:id', controller.updateTodo);
+todoRouter.patch('/:id', todoController.updateTodo);
 
 
 //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
@@ -68,17 +68,16 @@ todoRouter.patch('/:id', controller.updateTodo);
 // MISSING '/todo/:id' DELETE
 
 
-todoRouter.delete('/:id', controller.deleteTodo);
+todoRouter.delete('/:id', todoController.deleteTodo);
 
-  //recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
-  //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
+//recogemos el valor de la variable del path llamada "id" y lo transformarlo a un numero (todos nuestros ids son numericos).
+    //cualquier valor que recogemos de req.params será siempre un String. Por eso lo debemos convertir a numero.
   
-  //buscar dentro del array "todos" aquel elemento que coincide con el id recibido por parametro de la ruta en la request.
-  //si existe, lo BORRAMOS y devolvemos un codigo de status 204.
+    //buscar dentro del array "todos" aquel elemento que coincide con el id recibido por parametro de la ruta en la request.
+    //si existe, lo BORRAMOS y devolvemos un codigo de status 204.
   
-  //Si no hemos econtrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
-
-
+    //Si no hemos encontrado un TODO o no nos han pasado un id en la ruta, devolvemos un 404.
 
 //exportamos el router para poder 'usarlo' en nuestra app.
+
 module.exports = todoRouter;
